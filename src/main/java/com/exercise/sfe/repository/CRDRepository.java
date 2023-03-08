@@ -8,7 +8,7 @@ import java.util.Optional;
  *
  * @param <T> Entity type of the data which is an [Entity]
  */
-public interface CRDRepository<T> {
+public interface CrdRepository<T> {
 
   /**
    * Finds all entities

@@ -3,7 +3,7 @@ package com.exercise.sfe.constant;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class GiftCertificateSQLQueries {
+public class GiftCertificateSqlQueries {
 
   public final String GET_ALL_GIFT_CERTIFICATES = "SELECT * FROM gift_certificate;";
   public final String GET_GIFT_CERTIFICATE_BY_ID = "SELECT * FROM gift_certificate WHERE id=?;";

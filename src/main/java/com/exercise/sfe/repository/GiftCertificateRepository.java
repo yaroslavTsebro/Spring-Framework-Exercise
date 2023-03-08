@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * This interface describes abstract behavior and data access functionality for the {@link GiftCertificate} entity
  */
-public interface GiftCertificateRepository extends CRUDRepository<GiftCertificate> {
+public interface GiftCertificateRepository extends CrudRepository<GiftCertificate> {
 
   /**
    * Finds all {@link GiftCertificate} entities with specified parameters.
@@ -15,5 +15,5 @@ public interface GiftCertificateRepository extends CRUDRepository<GiftCertificat
    * @param settings object for search parameters
    * @return {@link List} of found {@link GiftCertificate}.
    */
-  List<GiftCertificate> findAll(SearchingSettings settings);
+  List<GiftCertificate> getAll(SearchingSettings settings);
 }

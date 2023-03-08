@@ -2,6 +2,6 @@ package com.exercise.sfe.entity.group;
 
 import jakarta.validation.groups.Default;
 
-public interface CreateGroup extends Default {
+public interface OnCreate extends Default {
 
 }

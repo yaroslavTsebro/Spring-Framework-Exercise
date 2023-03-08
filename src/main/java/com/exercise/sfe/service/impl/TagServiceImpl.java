@@ -3,12 +3,13 @@ package com.exercise.sfe.service.impl;
 import com.exercise.sfe.constant.ErrorCodes;
 import com.exercise.sfe.constant.ErrorMessages;
 import com.exercise.sfe.entity.Tag;
+import com.exercise.sfe.entity.dto.TagDto;
 import com.exercise.sfe.exception.PersistenceException;
+import com.exercise.sfe.mapper.TagMapper;
 import com.exercise.sfe.repository.TagRepository;
 import com.exercise.sfe.service.TagService;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TagServiceImpl implements TagService {
 
   public TagRepository tagRepository;
+  public TagMapper tagMapper;
 
   @Override
   public List<Tag> getAll() {
@@ -27,25 +29,23 @@ public class TagServiceImpl implements TagService {
 
   @Override
   public Tag getById(Long id) {
-    var tag = tagRepository.getById(id);
-    if (tag.isEmpty()) {
-      throw new PersistenceException(
-          ErrorCodes.TAG_NOT_FOUND,
-          String.format(ErrorMessages.TAG_NOT_FOUND, id));
-    }
-    return tag.get();
+    return tagRepository.getById(id).stream().findFirst().orElseThrow(
+        () -> new PersistenceException(
+            ErrorCodes.TAG_NOT_FOUND,
+            String.format(ErrorMessages.TAG_NOT_FOUND, id))
+    );
   }
 
   @Override
-  public Tag create(Tag tag) {
+  public Tag create(TagDto tagDto) {
     try {
+      Tag tag = tagMapper.toTag(tagDto);
       return tagRepository.create(tag);
     } catch (Exception ex) {
       throw new PersistenceException(
           ErrorCodes.TAG_CREATION_IS_NOT_POSSIBLE,
-          String.format(ErrorMessages.TAG_CREATION_IS_NOT_POSSIBLE, tag.getName()));
+          String.format(ErrorMessages.TAG_CREATION_IS_NOT_POSSIBLE, tagDto.getName()));
     }
-
   }
 
   @Override

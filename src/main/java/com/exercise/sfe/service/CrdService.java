@@ -2,7 +2,7 @@ package com.exercise.sfe.service;
 
 import java.util.List;
 
-public interface BaseCRDService<T> {
+public interface CrdService<T, K> {
 
   /**
    * Finds all entities
@@ -29,7 +29,7 @@ public interface BaseCRDService<T> {
   /**
    * Creates entity by instance
    *
-   * @param t The entity for creation
+   * @param k The dto of entity for creation
    */
-  T create(T t);
+  T create(K k);
 }

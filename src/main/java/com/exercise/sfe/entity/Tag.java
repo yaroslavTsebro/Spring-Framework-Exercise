@@ -8,11 +8,7 @@ import lombok.ToString;
 
 @Data
 @ToString(callSuper = true)
-public class Tag extends AbstractEntity implements Serializable {
+public class Tag extends AbstractEntity {
 
-  private static final long serialVersionUID = 1L;
-
-  @NotNull
-  @Pattern(regexp = "[\\w\\s]{2,128}+")
   private String name;
 }

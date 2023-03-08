@@ -1,33 +1,29 @@
 package com.exercise.sfe.configuration;
 
 import javax.sql.DataSource;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
+@Profile("test")
 @Configuration
-@PropertySource("classpath:datasource.properties")
+@ComponentScan("com.exercise.sfe.repository")
 @EnableTransactionManagement
-@RequiredArgsConstructor
-public class DatasourceConfiguration {
-
-  private final Environment environment;
+public class TestConfiguration {
 
   @Bean
   public DataSource dataSource() {
-    var dataSource = new DriverManagerDataSource();
-    dataSource.setDriverClassName(environment.getProperty("datasource.driver-class-name"));
-    dataSource.setUrl(environment.getProperty("datasource.url"));
-    dataSource.setUsername(environment.getProperty("datasource.username"));
-    dataSource.setPassword(environment.getProperty("datasource.password"));
+    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setDriverClassName("org.h2.Driver");
+    dataSource.setUrl("jdbc:h2:mem:gift");
+    dataSource.setUsername("sa");
+    dataSource.setPassword("");
 
     return dataSource;
   }

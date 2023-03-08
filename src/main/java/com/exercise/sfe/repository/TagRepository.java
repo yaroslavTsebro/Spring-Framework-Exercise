@@ -8,7 +8,7 @@ import java.util.Optional;
 /**
  * This interface describes abstract behavior and data access functionality for the {@link Tag} entity
  */
-public interface TagRepository extends CRDRepository<Tag> {
+public interface TagRepository extends CrdRepository<Tag> {
 
   /**
    * Finds {@link Tag} by given name
@@ -16,7 +16,7 @@ public interface TagRepository extends CRDRepository<Tag> {
    * @param name the name of {@link Tag}
    * @return {@link Optional} of {@link Tag} entity
    */
-  Optional<Tag> findByNameLike(String name);
+  Optional<Tag> getByName(String name);
 
   /**
    * Finds entities by {@link GiftCertificate} id
@@ -24,7 +24,7 @@ public interface TagRepository extends CRDRepository<Tag> {
    * @param id The id of {@link GiftCertificate}
    * @return {@link List} of {@link Tag} entities
    */
-  List<Tag> findAllByGiftCertificateId(Long id);
+  List<Tag> getAllByGiftCertificateId(Long id);
 
   /**
    * Creates connection between {@link Tag} and {@link GiftCertificate}

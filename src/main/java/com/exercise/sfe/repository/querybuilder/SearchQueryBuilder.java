@@ -1,4 +1,4 @@
-package com.exercise.sfe.utility;
+package com.exercise.sfe.repository.querybuilder;
 
 import com.exercise.sfe.entity.search.SearchingSettings;
 

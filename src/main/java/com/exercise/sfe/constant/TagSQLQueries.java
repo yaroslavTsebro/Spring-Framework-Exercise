@@ -3,11 +3,11 @@ package com.exercise.sfe.constant;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class TagSQLQueries {
+public class TagSqlQueries {
 
   public final String GET_ALL_TAGS = "SELECT * FROM tag;";
   public final String GET_TAG_BY_ID = "SELECT * FROM tag WHERE id=?;";
-  public final String GET_TAG_BY_NAME_LIKE = "SELECT * FROM tag WHERE name LIKE ?;";
+  public final String GET_TAG_BY_NAME_LIKE = "SELECT * FROM tag WHERE name = ?;";
   public final String GET_ALL_TAGS_BY_GIFT_CERTIFICATE_ID = "SELECT t.* FROM tag t "
       + "LEFT JOIN gift_certificate_to_tag gc ON t.id = gc.tag_id WHERE gc.gift_certificate_id = ?";
 

@@ -5,13 +5,12 @@ package com.exercise.sfe.repository;
  *
  * @param <T> Entity type of the data which is an [Entity]
  */
-public interface CRUDRepository<T> extends CRDRepository<T> {
+public interface CrudRepository<T> extends CrdRepository<T> {
 
   /**
    * Updates entity according to differences between created Entity and Entity to update
    *
-   * @param previousEnt created Entity
-   * @param wantedEnt   Entity to update
+   * @param t   Entity to update
    */
-  void update(T previousEnt, T wantedEnt);
+  void update(T t);
 }

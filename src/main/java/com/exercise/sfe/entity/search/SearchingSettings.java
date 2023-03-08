@@ -16,5 +16,5 @@ public class SearchingSettings {
   @Pattern(regexp = "[\\w\\s]{2,512}+")
   private String giftCertificateDescription;
 
-  private Map<String, @Pattern(regexp = "ASC|DESC") SortingAscOrDesc> sortingMap;
+  private Map<String, @Pattern(regexp = "ASC|DESC") SortingTypes> sortingMap;
 }

@@ -1,8 +1,8 @@
-package com.exercise.sfe.utility.impl;
+package com.exercise.sfe.repository.querybuilder.impl;
 
 import com.exercise.sfe.entity.search.SearchingSettings;
-import com.exercise.sfe.entity.search.SortingAscOrDesc;
-import com.exercise.sfe.utility.SearchQueryBuilder;
+import com.exercise.sfe.entity.search.SortingTypes;
+import com.exercise.sfe.repository.querybuilder.SearchQueryBuilder;
 import io.micrometer.common.util.StringUtils;
 import java.util.Map.Entry;
 
@@ -35,9 +35,9 @@ public class GiftCertificateSearchQueryBuilder implements SearchQueryBuilder {
     builder.append(column + " LIKE " + "'" + searchLike + "'");
   }
 
-  private void addSortingFromMapEntry(Entry<String, SortingAscOrDesc> pair, StringBuilder builder) {
+  private void addSortingFromMapEntry(Entry<String, SortingTypes> pair, StringBuilder builder) {
     String key = pair.getKey();
-    SortingAscOrDesc sortingType = pair.getValue();
+    SortingTypes sortingType = pair.getValue();
 
     if (builder.toString().contains("ORDER BY")) {
       builder.append(", ");
