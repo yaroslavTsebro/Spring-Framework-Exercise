@@ -68,6 +68,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
           }
         })
         .collect(Collectors.toList());
+
   }
 
   @Override
@@ -89,26 +90,17 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
   @Transactional
   @Override
   public GiftCertificate update(GiftCertificateDto giftCertificateDto, Long id) {
-    GiftCertificate wantedGiftCertificate = giftCertificateMapper
-        .toGiftCertificate(giftCertificateDto);
-    giftCertificateRepository.getById(id).orElseThrow(
-        () -> {
-          throw new PersistenceException(
-              ErrorCodes.GIFT_CERTIFICATE_NOT_FOUND,
-              String.format(
-                  ErrorMessages.GIFT_CERTIFICATE_NOT_FOUND,
-                  wantedGiftCertificate.getId())
-          );
-        });
+    GiftCertificate wantedGiftCertificate =
+        giftCertificateMapper.toGiftCertificate(giftCertificateDto);
     try {
+      checkGiftCertificateForPresence(id);
       wantedGiftCertificate.setId(id);
       giftCertificateRepository.update(wantedGiftCertificate);
-      if (wantedGiftCertificate.getTags() != null) {
-        List<Tag> previousTags = tagRepository.getAllByGiftCertificateId(id);
-        updateTagsConnectedToGiftCertificate(previousTags, wantedGiftCertificate.getTags(), id);
-      }
+      updateTags(wantedGiftCertificate);
+
     } catch (PersistenceException e) {
       throw new PersistenceException(e.getCode(), e.getBody());
+
     } catch (Exception e) {
       throw new PersistenceException(
           ErrorCodes.GIFT_CERTIFICATE_UPDATING_IS_NOT_POSSIBLE,
@@ -116,8 +108,29 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
               ErrorMessages.GIFT_CERTIFICATE_UPDATING_IS_NOT_POSSIBLE, id)
       );
     }
+
     return this.getById(id);
   }
+
+  public void checkGiftCertificateForPresence(Long id) {
+    var giftCertificate = giftCertificateRepository.getById(id);
+    if (giftCertificate.isEmpty()) {
+      throw new PersistenceException(
+          ErrorCodes.GIFT_CERTIFICATE_NOT_FOUND,
+          String.format(
+              ErrorMessages.GIFT_CERTIFICATE_NOT_FOUND, id)
+      );
+    }
+  }
+
+  public void updateTags(GiftCertificate giftCertificate) {
+    Long id = giftCertificate.getId();
+    if (giftCertificate.getTags() != null) {
+      List<Tag> previousTags = tagRepository.getAllByGiftCertificateId(id);
+      updateTagsConnectedToGiftCertificate(previousTags, giftCertificate.getTags(), id);
+    }
+  }
+
 
   public void updateTagsConnectedToGiftCertificate(List<Tag> previousTags, List<Tag> wantedTags,
       Long certificateId) {
@@ -202,7 +215,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
     try {
       var created = giftCertificateRepository.create(giftCertificate);
       if (giftCertificate.getTags() != null) {
-        connectOrCreateAndConnectTags(giftCertificate.getTags(), giftCertificate.getId());
+        connectOrCreateAndConnectTags(giftCertificate.getTags(), created.getId());
       }
 
       return created;

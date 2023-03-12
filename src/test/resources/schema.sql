@@ -25,9 +25,9 @@ create table tag
 DROP TABLE if exists gift_certificate_to_tag CASCADE;
 CREATE TABLE gift_certificate_to_tag
 (
-    id                  serial not null
+    id                  serial
         constraint gift_certificate_to_tag_pk primary key,
     gift_certificate_id int REFERENCES gift_certificate (id) ON UPDATE CASCADE ON DELETE CASCADE,
     tag_id              int REFERENCES tag (id) ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT gift_certificate_tag_pk PRIMARY KEY (id)
+    CONSTRAINT gift_certificate_tag_to_pk PRIMARY KEY (id)
 );

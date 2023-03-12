@@ -4,9 +4,7 @@ import com.exercise.sfe.entity.GiftCertificate;
 import com.exercise.sfe.entity.search.SearchingSettings;
 import java.util.List;
 
-/**
- * This interface describes abstract behavior and data access functionality for the {@link GiftCertificate} entity
- */
+
 public interface GiftCertificateRepository extends CrudRepository<GiftCertificate> {
 
   /**

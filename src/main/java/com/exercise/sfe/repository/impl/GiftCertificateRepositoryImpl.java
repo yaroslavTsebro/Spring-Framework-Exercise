@@ -3,7 +3,6 @@ package com.exercise.sfe.repository.impl;
 import com.exercise.sfe.constant.GiftCertificateSqlQueries;
 import com.exercise.sfe.entity.GiftCertificate;
 import com.exercise.sfe.entity.search.SearchingSettings;
-import com.exercise.sfe.repository.BaseRepository;
 import com.exercise.sfe.repository.GiftCertificateRepository;
 import com.exercise.sfe.repository.querybuilder.impl.GiftCertificateSearchQueryBuilder;
 import com.exercise.sfe.repository.querybuilder.impl.GiftCertificateUpdateQueryBuilder;
@@ -22,13 +21,13 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GiftCertificateRepositoryImpl extends BaseRepository implements
-    GiftCertificateRepository {
+public class GiftCertificateRepositoryImpl implements GiftCertificateRepository {
 
-  private RowMapper<GiftCertificate> rowMapper;
+  public final JdbcTemplate jdbcTemplate;
+  private final RowMapper<GiftCertificate> rowMapper;
 
   public GiftCertificateRepositoryImpl(JdbcTemplate jdbcTemplate) {
-    super(jdbcTemplate);
+    this.jdbcTemplate = jdbcTemplate;
     this.rowMapper = new BeanPropertyRowMapper<>(GiftCertificate.class);
   }
 
@@ -39,7 +38,8 @@ public class GiftCertificateRepositoryImpl extends BaseRepository implements
 
   @Override
   public Optional<GiftCertificate> getById(Long id) {
-    return jdbcTemplate.queryForStream(GiftCertificateSqlQueries.GET_GIFT_CERTIFICATE_BY_ID, rowMapper, id)
+    return jdbcTemplate.queryForStream(GiftCertificateSqlQueries.GET_GIFT_CERTIFICATE_BY_ID,
+            rowMapper, id)
         .findFirst();
   }
 

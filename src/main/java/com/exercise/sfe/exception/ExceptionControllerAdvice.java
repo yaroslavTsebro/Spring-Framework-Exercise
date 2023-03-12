@@ -12,7 +12,7 @@ public class ExceptionControllerAdvice {
 
   @ExceptionHandler
   public ResponseEntity<ApiErrorResponseDto> handler(PersistenceException ex) {
-    ApiErrorResponseDto errorBody = new ApiErrorResponseDto(ex.getCode(), ex.getBody());
-    return ResponseEntity.status(HttpStatus.valueOf(errorBody.getErrorCode() / 100)).body(errorBody);
+    ApiErrorResponseDto errorResponse = new ApiErrorResponseDto(ex.getCode(), ex.getBody());
+    return ResponseEntity.status(HttpStatus.valueOf(errorResponse.getErrorCode() / 100)).body(errorResponse);
   }
 }

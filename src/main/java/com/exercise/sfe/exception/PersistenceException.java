@@ -10,5 +10,5 @@ import lombok.Setter;
 public class PersistenceException extends RuntimeException {
 
   private final int code;
-  private final transient String body;
+  private final String body;
 }

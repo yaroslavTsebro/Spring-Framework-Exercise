@@ -2,7 +2,6 @@ package com.exercise.sfe.repository.impl;
 
 import com.exercise.sfe.constant.TagSqlQueries;
 import com.exercise.sfe.entity.Tag;
-import com.exercise.sfe.repository.BaseRepository;
 import com.exercise.sfe.repository.TagRepository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -19,12 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Repository
-public class TagRepositoryImpl extends BaseRepository implements TagRepository {
+public class TagRepositoryImpl implements TagRepository {
 
-  private RowMapper<Tag> rowMapper;
+  public final JdbcTemplate jdbcTemplate;
+  private final RowMapper<Tag> rowMapper;
 
   public TagRepositoryImpl(JdbcTemplate jdbcTemplate) {
-    super(jdbcTemplate);
+    this.jdbcTemplate = jdbcTemplate;
     this.rowMapper = new BeanPropertyRowMapper<>(Tag.class);
   }
 

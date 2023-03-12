@@ -3,11 +3,6 @@ package com.exercise.sfe.repository;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Base interface of a CRD repository for data layer.
- *
- * @param <T> Entity type of the data which is an [Entity]
- */
 public interface CrdRepository<T> {
 
   /**

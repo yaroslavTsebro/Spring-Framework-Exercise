@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-public class GiftCertificateToTag extends AbstractEntity {
+public class GiftCertificateTag extends AbstractEntity {
 
   private Tag tag;
   private GiftCertificate giftCertificate;

@@ -5,9 +5,7 @@ import com.exercise.sfe.entity.Tag;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * This interface describes abstract behavior and data access functionality for the {@link Tag} entity
- */
+
 public interface TagRepository extends CrdRepository<Tag> {
 
   /**
@@ -30,7 +28,7 @@ public interface TagRepository extends CrdRepository<Tag> {
    * Creates connection between {@link Tag} and {@link GiftCertificate}
    *
    * @param tagId The id of {@link Tag}
-   * @param gcId The id of {@link GiftCertificate}
+   * @param gcId  The id of {@link GiftCertificate}
    */
   void connectTagToGiftCertificate(Long tagId, Long gcId);
 
@@ -38,7 +36,7 @@ public interface TagRepository extends CrdRepository<Tag> {
    * Delete connection between {@link Tag} and {@link GiftCertificate}
    *
    * @param tagId The id of {@link Tag}
-   * @param gcId The id of {@link GiftCertificate}
+   * @param gcId  The id of {@link GiftCertificate}
    * @return count of deleted connections
    */
   int deleteConnectionToGiftCertificate(Long tagId, Long gcId);

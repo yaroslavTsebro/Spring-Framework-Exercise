@@ -16,6 +16,12 @@ public interface GiftCertificateService extends CrudService<GiftCertificate, Gif
    */
   List<GiftCertificate> getAll(SearchingSettings settings);
 
+  /**
+   * Finds all {@link GiftCertificate} according to presence of settings
+   *
+   * @param settings The {@link SearchingSettings} entity
+   * @return {@link List} of {@link GiftCertificate}
+   */
   List<GiftCertificate> getAllAccordingToSettings(SearchingSettings settings);
 
 }
