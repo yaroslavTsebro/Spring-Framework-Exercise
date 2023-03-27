@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class TagRepositoryImpl implements TagRepository {
 
-  public final JdbcTemplate jdbcTemplate;
+  private final JdbcTemplate jdbcTemplate;
   private final RowMapper<Tag> rowMapper;
 
   public TagRepositoryImpl(JdbcTemplate jdbcTemplate) {

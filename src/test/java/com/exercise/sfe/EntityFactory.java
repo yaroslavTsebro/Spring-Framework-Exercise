@@ -17,7 +17,7 @@ import lombok.experimental.UtilityClass;
 public class EntityFactory {
 
   private final LocalDateTime time = LocalDateTime.parse("2023-03-08T12:28:17");
-  private static AtomicLong counter = new AtomicLong(4L);
+  private final AtomicLong counter = new AtomicLong(4L);
 
   public Tag createTag(Long id) {
     var tag = new Tag();
@@ -26,7 +26,7 @@ public class EntityFactory {
     return tag;
   }
 
-  public List<Tag> createTag(Long[] ids) {
+  public List<Tag> createListOfTags(Long[] ids) {
     return Arrays.stream(ids)
         .map(EntityFactory::createTag)
         .collect(Collectors.toList());
@@ -73,7 +73,7 @@ public class EntityFactory {
   }
 
 
-  public List<GiftCertificate> createGiftCertificate(Long[] ids) {
+  public List<GiftCertificate> createListOfGiftCertificates(Long[] ids) {
     return Arrays.stream(ids)
         .map(EntityFactory::createGiftCertificate)
         .collect(Collectors.toList());

@@ -1,8 +1,5 @@
 package com.exercise.sfe.entity;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.ToString;
 
@@ -10,5 +7,6 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class Tag extends AbstractEntity {
 
+  private static final long serialVersionUID = -4386959427886555570L;
   private String name;
 }

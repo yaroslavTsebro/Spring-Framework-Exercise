@@ -4,13 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 import com.exercise.sfe.EntityFactory;
-import com.exercise.sfe.constant.ErrorCodes;
-import com.exercise.sfe.constant.ErrorMessages;
 import com.exercise.sfe.entity.Tag;
 import com.exercise.sfe.entity.dto.TagDto;
 import com.exercise.sfe.exception.PersistenceException;
@@ -39,7 +36,7 @@ class TagServiceImplTest {
 
   @Test
   void getAll_shouldReturnListOfTags() {
-    List<Tag> expected = EntityFactory.createTag(new Long[]{1L, 2L, 3L});
+    List<Tag> expected = EntityFactory.createListOfTags(new Long[]{1L, 2L, 3L});
     given(tagRepository.getAll()).willReturn(expected);
 
     var actual = tagService.getAll();

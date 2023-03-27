@@ -6,14 +6,9 @@ import com.exercise.sfe.EntityFactory;
 import com.exercise.sfe.configuration.TestConfiguration;
 import com.exercise.sfe.entity.Tag;
 import com.exercise.sfe.repository.TagRepository;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.h2.tools.Server;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @ContextConfiguration(classes = TestConfiguration.class)
-@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @RequiredArgsConstructor
 @WebAppConfiguration
-@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class TagRepositoryImplTest {
 
   @Autowired
@@ -40,7 +33,7 @@ class TagRepositoryImplTest {
 
   @Test
   void getAll_shouldReturnAllTags() {
-    List<Tag> expected = EntityFactory.createTag(new Long[]{1L, 2L, 3L});
+    List<Tag> expected = EntityFactory.createListOfTags(new Long[]{1L, 2L, 3L});
     List<Tag> actual = tagRepository.getAll();
     assertEquals(expected, actual);
   }
@@ -81,7 +74,7 @@ class TagRepositoryImplTest {
   @Test
   void getAllByGiftCertificateId_shouldReturnAllTagsThatConnectedToGiftCertificateWithId() {
     Long id = 1L;
-    List<Tag> expected = EntityFactory.createTag(new Long[]{1L, 2L, 3L});
+    List<Tag> expected = EntityFactory.createListOfTags(new Long[]{1L, 2L, 3L});
     List<Tag> actual = tagRepository.getAllByGiftCertificateId(1L);
     assertEquals(expected, actual);
   }
@@ -89,7 +82,7 @@ class TagRepositoryImplTest {
   @Test
   void connectTagToGiftCertificate_shouldCreateConnectionBetweenTagAndGiftCertificateByIds() {
     Long certificateId = 1L;
-    List<Tag> expected = EntityFactory.createTag(new Long[]{1L, 2L, 3L});
+    List<Tag> expected = EntityFactory.createListOfTags(new Long[]{1L, 2L, 3L});
     Tag tag = EntityFactory.createTag();
     tagRepository.create(tag);
     expected.add(tag);

@@ -23,7 +23,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class GiftCertificateRepositoryImpl implements GiftCertificateRepository {
 
-  public final JdbcTemplate jdbcTemplate;
+  private final JdbcTemplate jdbcTemplate;
   private final RowMapper<GiftCertificate> rowMapper;
 
   public GiftCertificateRepositoryImpl(JdbcTemplate jdbcTemplate) {

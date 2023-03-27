@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GiftCertificateTag extends AbstractEntity {
 
+  private static final long serialVersionUID = 1976295386048222544L;
   private Tag tag;
   private GiftCertificate giftCertificate;
 }

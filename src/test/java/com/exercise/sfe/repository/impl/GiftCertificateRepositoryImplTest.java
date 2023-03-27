@@ -11,8 +11,6 @@ import com.exercise.sfe.entity.search.SearchingSettings;
 import com.exercise.sfe.repository.GiftCertificateRepository;
 import com.exercise.sfe.repository.TagRepository;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -31,11 +29,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @ContextConfiguration(classes = TestConfiguration.class)
-@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @RequiredArgsConstructor
 @WebAppConfiguration
-@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class GiftCertificateRepositoryImplTest {
 
   @Autowired
@@ -45,7 +41,7 @@ class GiftCertificateRepositoryImplTest {
 
   @Test
   void getAll_shouldReturnAllGiftCertificates() {
-    var expected = EntityFactory.createGiftCertificate(new Long[]{1L, 2L});
+    var expected = EntityFactory.createListOfGiftCertificates(new Long[]{1L, 2L});
     var actual = giftCertificateRepository.getAll();
 
     assertEquals(expected, actual);
@@ -121,8 +117,8 @@ class GiftCertificateRepositoryImplTest {
   private void createAllForGetAllBySettings() {
     String testName = "testName";
 
-    var certificatesToCreate = EntityFactory.createGiftCertificate(new Long[]{3L, 4L});
-    var tags = EntityFactory.createTag(new Long[]{4L, 5L});
+    var certificatesToCreate = EntityFactory.createListOfGiftCertificates(new Long[]{4L, 5L});
+    var tags = EntityFactory.createListOfTags(new Long[]{4L, 5L});
     certificatesToCreate.get(0).setTags(tags);
     var newTag = new Tag();
     newTag.setName(testName);
@@ -131,7 +127,7 @@ class GiftCertificateRepositoryImplTest {
 
     certificatesToCreate.forEach(s -> giftCertificateRepository.create(s));
     tags.forEach(s -> tagRepository.create(s));
-    tags.forEach(s -> tagRepository.connectTagToGiftCertificate(s.getId(), 3L));
+    tags.forEach(s -> tagRepository.connectTagToGiftCertificate(s.getId(), 4L));
   }
 
 

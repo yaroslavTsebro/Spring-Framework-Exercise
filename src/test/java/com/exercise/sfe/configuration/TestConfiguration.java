@@ -31,7 +31,6 @@ public class TestConfiguration {
 
   private final Environment environment;
 
-  @Profile("test")
   @Bean
   public DataSource dataSource() {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -48,13 +47,11 @@ public class TestConfiguration {
     return dataSource;
   }
 
-  @Profile("test")
   @Bean
   public JdbcTemplate jdbcTemplate(DataSource dataSource) {
     return new JdbcTemplate(dataSource);
   }
 
-  @Profile("test")
   @Bean
   public TransactionManager transactionManager(DataSource dataSource) {
     return new DataSourceTransactionManager(dataSource);

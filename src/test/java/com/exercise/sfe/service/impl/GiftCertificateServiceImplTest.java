@@ -18,7 +18,6 @@ import com.exercise.sfe.entity.dto.GiftCertificateDto;
 import com.exercise.sfe.entity.search.SearchingSettings;
 import com.exercise.sfe.exception.PersistenceException;
 import com.exercise.sfe.mapper.GiftCertificateMapperImpl;
-import com.exercise.sfe.mapper.TagMapperImpl;
 import com.exercise.sfe.repository.GiftCertificateRepository;
 import com.exercise.sfe.repository.TagRepository;
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.dao.DataAccessException;
 
 @ExtendWith(MockitoExtension.class)
 class GiftCertificateServiceImplTest {
@@ -63,7 +61,7 @@ class GiftCertificateServiceImplTest {
   @Test
   void getAllBySettings() {
     SearchingSettings settings = mock(SearchingSettings.class);
-    var giftCertificate = EntityFactory.createGiftCertificate(new Long[]{1L});
+    var giftCertificate = EntityFactory.createListOfGiftCertificates(new Long[]{1L});
     given(giftCertificateRepository.getAll(settings)).willReturn(giftCertificate);
 
     var actual = giftCertificateService.getAll(settings);
@@ -128,7 +126,7 @@ class GiftCertificateServiceImplTest {
   @Test
   void create_shouldCreateGiftCertificateAndReturnIt() {
     var certificate = EntityFactory.createGiftCertificate(5L);
-    List<Tag> tags = EntityFactory.createTag(new Long[]{1L, 2L, 4L});
+    List<Tag> tags = EntityFactory.createListOfTags(new Long[]{1L, 2L, 4L});
     certificate.setTags(tags);
 
     given(giftCertificateRepository.create(any())).willReturn(certificate);
